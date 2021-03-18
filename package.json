@@ -1,15 +1,33 @@
 {
-  "name": "memegen",
+  "name": "@hank-iv/memegen",
   "version": "1.0.0",
-  "description": "",
+  "description": "A meme generator in NodeJs",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "directories": {
+    "lib": "lib"
   },
-  "author": "Hank",
-  "license": "ISC",
   "dependencies": {
     "canvas": "^2.7.0",
     "img-clipboard": "^1.0.4"
-  }
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hankolsen/memegen.git"
+  },
+  "keywords": [
+    "meme",
+    "memegenerator",
+    "image",
+    "fun"
+  ],
+  "author": "Hank",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hankolsen/memegen/issues"
+  },
+  "homepage": "https://github.com/hankolsen/memegen#readme"
 }
