@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+const meme = require('./index');
+
+meme();
