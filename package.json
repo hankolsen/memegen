@@ -4,7 +4,11 @@
   "description": "A meme generator in NodeJs",
   "main": "index.js",
   "directories": {
-    "lib": "lib"
+    "lib": "lib",
+    "bin": "bin"
+  },
+  "bin": {
+    "meme": "./bin/meme"
   },
   "dependencies": {
     "canvas": "^2.7.0",
