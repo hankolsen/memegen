@@ -1,5 +1,5 @@
-import generator  from '../lib/generator';
 import meow from 'meow';
+import generator from '../lib/generator';
 
 const main = async () => {
   const cli = meow(
@@ -42,10 +42,12 @@ const main = async () => {
   const imagePath = cli.input[0];
   const topText = cli.flags.toptext;
   const bottomText = cli.flags.bottomtext;
-  const output = cli.flags.output;
+  const { output } = cli.flags;
 
   if (!topText && !bottomText) {
-    return console.log(cli.help);
+    // eslint-disable-next-line no-console
+    console.log(cli.help);
+    return;
   }
 
   generator({ imagePath, topText, bottomText, output });
