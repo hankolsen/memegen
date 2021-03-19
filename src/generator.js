@@ -1,50 +1,26 @@
-"use strict";
+import { createCanvas, loadImage, registerFont } from 'canvas';
+import { copyImg } from 'img-clipboard';
+import fs from 'fs';
 
-var _canvas = require("canvas");
-
-var _imgClipboard = require("img-clipboard");
-
-var _fs = _interopRequireDefault(require("fs"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-const getCanvas = ({
-  width,
-  image
-}) => {
-  const canvasHeight = image.height / image.width * width;
-  (0, _canvas.registerFont)(`${__dirname}/fonts/impact.ttf`, {
-    family: 'Impact'
-  });
-  const canvas = (0, _canvas.createCanvas)(width, canvasHeight);
+const getCanvas = ({ width, image }) => {
+  const canvasHeight = (image.height / image.width) * width;
+  registerFont(`${__dirname}/fonts/impact.ttf`, { family: 'Impact' });
+  const canvas = createCanvas(width, canvasHeight);
   const ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, width, canvasHeight);
   ctx.drawImage(image, 0, 0, width, canvasHeight);
-  return {
-    canvas,
-    height: canvasHeight
-  };
+  return { canvas, height: canvasHeight };
 };
 
-const writeText = ({
-  canvas,
-  width,
-  height,
-  topText,
-  bottomText
-}) => {
+const writeText = ({ canvas, width, height, topText, bottomText }) => {
   const x = width / 2;
   const y = 10;
   const fontSize = 23;
   const ctx = canvas.getContext('2d');
+
   ctx.textBaseline = 'top';
-  fitText({
-    ctx,
-    x,
-    y,
-    text: topText,
-    fontSize
-  });
+  fitText({ ctx, x, y, text: topText, fontSize });
+
   ctx.textBaseline = 'bottom';
   fitText({
     ctx,
@@ -52,18 +28,11 @@ const writeText = ({
     y: height - y / 2,
     text: bottomText,
     fontSize,
-    fromBottom: true
+    fromBottom: true,
   });
 };
 
-const fitText = ({
-  ctx,
-  x,
-  y,
-  text,
-  fontSize,
-  fromBottom = false
-}) => {
+const fitText = ({ ctx, x, y, text, fontSize, fromBottom = false }) => {
   const fontFamily = 'Impact';
   const lineHeightRatio = 1.5 * (fromBottom ? -1 : 1);
   const maxWidth = 480;
@@ -77,12 +46,12 @@ const fitText = ({
   const lineHeight = lineHeightRatio * fontSize;
   let lines = [];
   let line = '';
+
   const words = text.toUpperCase().split(' ');
-  words.forEach(word => {
+  words.forEach((word) => {
     const testLine = line ? `${line} ${word}` : word;
     const metrics = ctx.measureText(testLine);
     const testWidth = metrics.width;
-
     if (testWidth > maxWidth) {
       lines = fromBottom ? [line, ...lines] : [...lines, line];
       line = word;
@@ -93,14 +62,7 @@ const fitText = ({
   lines = fromBottom ? [line, ...lines] : [...lines, line];
 
   if (lines.length > maxLines) {
-    fitText({
-      ctx,
-      x,
-      y,
-      fontSize: fontSize - 5,
-      text,
-      fromBottom
-    });
+    fitText({ ctx, x, y, fontSize: fontSize - 5, text, fromBottom });
   } else {
     lines.forEach((line, i) => {
       ctx.strokeText(line, x, y + lineHeight * i);
@@ -111,9 +73,7 @@ const fitText = ({
 
 const writeMeme = (canvas, output) => {
   const stream = canvas.createPNGStream();
-
-  const out = _fs.default.createWriteStream(output);
-
+  const out = fs.createWriteStream(output);
   stream.pipe(out);
   out.on('finish', () => console.log(`...and your image is available as ${output}`));
 };
@@ -123,26 +83,22 @@ const generator = async ({
   imagePath = `${__dirname}/images/That-Would-Be-Great.jpg`,
   topText = '',
   bottomText = '',
-  output = ''
+  output = '',
 } = {}) => {
-  const image = await (0, _canvas.loadImage)(imagePath);
-  const {
-    canvas,
-    height
-  } = getCanvas({
-    width,
-    image
-  });
+  const image = await loadImage(imagePath);
+  const { canvas, height } = getCanvas({ width, image });
   writeText({
     canvas,
     width,
     height,
     topText,
-    bottomText
+    bottomText,
   });
-  (0, _imgClipboard.copyImg)(Buffer.from(canvas.toBuffer(), 'base64'));
+  copyImg(Buffer.from(canvas.toBuffer(), 'base64'));
   output && writeMeme(canvas, output);
-  console.log('Done! Just paste the content of your clipboard wherever you want the image');
+  console.log(
+    'Done! Just paste the content of your clipboard wherever you want the image',
+  );
 };
 
 module.exports = generator;
