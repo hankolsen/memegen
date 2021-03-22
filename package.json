@@ -27,7 +27,8 @@
   },
   "scripts": {
     "eslint": "eslint .",
-    "dev": "babel src -w --out-dir lib --copy-files",
+    "build": "babel src --out-dir lib --copy-files",
+    "dev": "npm run build -- -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -1,4 +1,4 @@
 #!/usr/bin/env node
-const meme = require('../lib/index');
+const meme = require('../lib/index').default;
 
 meme();
