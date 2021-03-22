@@ -28,8 +28,7 @@
   "scripts": {
     "eslint": "eslint .",
     "dev": "babel src -w --out-dir lib --copy-files",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky install"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
