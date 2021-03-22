@@ -53,7 +53,7 @@ const writeMeme = (canvas, output) => {
 
 const getCanvas = ({ width, image }) => {
   const canvasHeight = (image.height / image.width) * width;
-  registerFont(`${__dirname}/fonts/impact.ttf`, { family: 'Impact' });
+  registerFont(`${__dirname}/assets/fonts/impact.ttf`, { family: 'Impact' });
   const canvas = createCanvas(width, canvasHeight);
   const ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, width, canvasHeight);
@@ -83,7 +83,7 @@ const writeText = ({ canvas, width, height, topText, bottomText }) => {
 
 const generator = async ({
   width = 500,
-  imagePath = `${__dirname}/images/That-Would-Be-Great.jpg`,
+  imagePath = `${__dirname}/assets/images/That-Would-Be-Great.jpg`,
   topText = '',
   bottomText = '',
   output = '',
