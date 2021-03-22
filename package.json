@@ -1,6 +1,6 @@
 {
   "name": "@hank-iv/memegen",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A meme generator in NodeJs",
   "main": "index.js",
   "directories": {
