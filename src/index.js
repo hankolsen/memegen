@@ -1,5 +1,5 @@
 import meow from 'meow';
-import generator from '../lib/generator';
+import generator from './generator';
 
 const main = async () => {
   const cli = meow(
@@ -53,4 +53,4 @@ const main = async () => {
   generator({ imagePath, topText, bottomText, output });
 };
 
-module.exports = main;
+export default main;

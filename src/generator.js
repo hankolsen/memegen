@@ -107,4 +107,4 @@ const generator = async ({
   );
 };
 
-module.exports = generator;
+export default generator;
