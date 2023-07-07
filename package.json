@@ -59,8 +59,8 @@
     "meow": "^9.0.0"
   },
   "devDependencies": {
-    "eslint": "^7.22.0",
-    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint": "^8.44.0",
+    "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.27.5",
     "husky": "^4.3.8",
     "lint-staged": "^10.5.4",
