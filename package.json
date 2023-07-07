@@ -28,12 +28,8 @@
     "build": "parcel build && npm run cp:assets",
     "cp:assets": "cp -R src/assets lib/",
     "dev": "parcel watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix"
@@ -62,8 +58,8 @@
     "eslint": "^8.44.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.27.5",
-    "husky": "^4.3.8",
-    "lint-staged": "^10.5.4",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.3",
     "parcel": "^2.9.3"
   }
 }
