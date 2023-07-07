@@ -18,14 +18,16 @@
     "url": "git+https://github.com/hankolsen/memegen.git"
   },
   "homepage": "https://github.com/hankolsen/memegen#readme",
+  "source": "src/index.js",
+  "main": "lib/index.js",
   "bin": {
     "meme": "./bin/meme"
   },
   "scripts": {
     "eslint": "eslint .",
-    "build": "parcel build src/index.js && npm run cp:assets",
+    "build": "parcel build && npm run cp:assets",
     "cp:assets": "cp -R src/assets lib/",
-    "dev": "parcel watch src/index.js",
+    "dev": "parcel watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "husky": {
@@ -44,16 +46,15 @@
     "default": {
       "context": "node",
       "engines": {
-        "node": "12"
-      },
-      "distDir": "lib"
+        "node": "18"
+      }
     }
   },
   "engines": {
-    "node": "12"
+    "node": "18"
   },
   "dependencies": {
-    "canvas": "^2.7.0",
+    "canvas": "^2.9.0",
     "img-clipboard": "^1.0.4",
     "meow": "^9.0.0"
   },
@@ -63,6 +64,6 @@
     "eslint-plugin-import": "^2.22.1",
     "husky": "^4.3.8",
     "lint-staged": "^10.5.4",
-    "parcel": "^2.0.0-beta.2"
+    "parcel": "^2.0.0"
   }
 }
