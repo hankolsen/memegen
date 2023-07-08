@@ -1,6 +1,6 @@
 {
   "name": "@hank-iv/memegen",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "author": "Hank",
   "license": "MIT",
   "description": "A meme generator in NodeJs",
@@ -18,48 +18,37 @@
     "url": "git+https://github.com/hankolsen/memegen.git"
   },
   "homepage": "https://github.com/hankolsen/memegen#readme",
+  "type": "module",
   "source": "src/index.js",
-  "main": "lib/index.js",
   "bin": {
-    "meme": "./bin/meme"
+    "meme": "./bin/meme.js"
   },
   "scripts": {
-    "eslint": "eslint .",
-    "build": "parcel build && npm run cp:assets",
-    "cp:assets": "cp -R src/assets lib/",
-    "dev": "parcel watch",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky install"
-  },
-  "lint-staged": {
-    "*.js": "eslint --cache --fix"
+    "lint": "prettier --check . && eslint .",
+    "format": "prettier --write .",
+    "build": "npm run clean && rollup -c && npm run cp:assets",
+    "clean": "npx rimraf lib",
+    "cp:assets": "cp -R src/assets lib/"
   },
   "directories": {
     "lib": "lib",
     "bin": "bin"
   },
-  "targets": {
-    "default": {
-      "context": "node",
-      "engines": {
-        "node": "18"
-      }
-    }
-  },
   "engines": {
-    "node": "18"
+    "node": ">=18"
   },
   "dependencies": {
     "canvas": "^2.11.2",
     "img-clipboard": "^1.1.0",
-    "meow": "^9.0.0"
+    "meow": "^12.0.1"
   },
   "devDependencies": {
+    "@rollup/plugin-image": "^3.0.2",
+    "@rollup/plugin-node-resolve": "^15.1.0",
+    "@rollup/plugin-terser": "^0.4.3",
     "eslint": "^8.44.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.27.5",
-    "husky": "^8.0.3",
-    "lint-staged": "^13.2.3",
-    "parcel": "^2.9.3"
+    "eslint-config-prettier": "^8.8.0",
+    "prettier": "^3.0.0",
+    "rollup": "^3.26.2"
   }
 }
