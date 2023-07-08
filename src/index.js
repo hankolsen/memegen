@@ -1,39 +1,40 @@
 import meow from 'meow';
 import generator from './generator';
 
-const main = async () => {
+export default async () => {
   const cli = meow(
     `
-  By default the resulting meme image ends up in your clipboard. Just paste it wherever.
+By default the resulting meme image ends up in your clipboard. Just paste it wherever.
 
-  Usage
-    $ meme <image url>
-    
-    If no image url is given it defaults to Lumbergh.
+Usage
+  $ meme <image url>
+  
+  If no image url is given it defaults to Lumbergh.
 
-    Options
-      --toptext, -t Text at the top of the image
-      --bottomtext, -b Text at the bottom of the image
-      --output, -o The location and filename to where to save the png image (if you also want it as a file)
-    
-    Examples
-      $ meme https://imgflip.com/s/meme/One-Does-Not-Simply.jpg -t "One does not simply" -b "create a meme generator"
-      $ meme -t "if you could use my meme generator" -b "that would be great"
-      $ meme -b "That would be great" -o "./my-meme.png"
-    `,
+  Options
+    --toptext, -t Text at the top of the image
+    --bottomtext, -b Text at the bottom of the image
+    --output, -o The location and filename to where to save the png image (if you also want it as a file)
+  
+  Examples
+    $ meme https://imgflip.com/s/meme/One-Does-Not-Simply.jpg -t "One does not simply" -b "create a meme generator"
+    $ meme -t "if you could use my meme generator" -b "that would be great"
+    $ meme -b "That would be great" -o "./my-meme.png"
+  `,
     {
+      importMeta: import.meta,
       flags: {
         toptext: {
           type: 'string',
-          alias: 't',
+          shortFlag: 't',
         },
         bottomtext: {
           type: 'string',
-          alias: 'b',
+          shortFlag: 'b',
         },
         output: {
           type: 'string',
-          alias: 'o',
+          shortFlag: 'o',
         },
       },
     },
@@ -47,10 +48,13 @@ const main = async () => {
   if (!topText && !bottomText) {
     // eslint-disable-next-line no-console
     console.log(cli.help);
-    return;
+    process.exit();
   }
 
-  generator({ imagePath, topText, bottomText, output });
+  generator({
+    imagePath,
+    topText,
+    bottomText,
+    output,
+  });
 };
-
-export default main;

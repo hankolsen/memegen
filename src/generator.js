@@ -1,6 +1,7 @@
 import { createCanvas, loadImage, registerFont } from 'canvas';
 import { copyImg } from 'img-clipboard';
 import fs from 'fs';
+import ThatWouldBeGreat from './assets/images/That-Would-Be-Great.jpg';
 
 const fitText = ({ ctx, x, y, text, fontSize, fromBottom = false }) => {
   const fontFamily = 'Impact';
@@ -53,7 +54,7 @@ const writeMeme = (canvas, output) => {
 
 const getCanvas = ({ width, image }) => {
   const canvasHeight = (image.height / image.width) * width;
-  registerFont(`${__dirname}/assets/fonts/impact.ttf`, { family: 'Impact' });
+  registerFont(new URL('./assets/fonts/impact.ttf', import.meta.url), { family: 'Impact' });
   const canvas = createCanvas(width, canvasHeight);
   const ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, width, canvasHeight);
@@ -83,7 +84,7 @@ const writeText = ({ canvas, width, height, topText, bottomText }) => {
 
 const generator = async ({
   width = 500,
-  imagePath = `${__dirname}/assets/images/That-Would-Be-Great.jpg`,
+  imagePath = ThatWouldBeGreat,
   topText = '',
   bottomText = '',
   output = '',
@@ -102,9 +103,7 @@ const generator = async ({
     writeMeme(canvas, output);
   }
   // eslint-disable-next-line no-console
-  console.log(
-    'Done! Just paste the content of your clipboard wherever you want the image',
-  );
+  console.log('Done! Just paste the content of your clipboard wherever you want the image');
 };
 
 export default generator;
