@@ -1,6 +1,6 @@
 {
   "name": "@hank-iv/memegen",
-  "version": "3.0.0",
+  "version": "3.0.2",
   "author": "Hank",
   "license": "MIT",
   "description": "A meme generator in NodeJs",
