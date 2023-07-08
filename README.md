@@ -27,8 +27,10 @@ Options:
 -o, --output        Path and filename where a .png image will be saved
 ```
 
-## Example
+## Examples
 
 ```bash
-$ meme https://i.kym-cdn.com/entries/icons/original/000/011/976/lumbergh.jpg -t "It would be great" -b "if you used my meme generator"
+$ meme https://imgflip.com/s/meme/One-Does-Not-Simply.jpg -t "One does not simply" -b "create a meme generator"
+$ meme -t "if you could use my meme generator" -b "that would be great"
+$ meme -b "That would be great" -o "./my-meme.png"
 ```
